@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="PharmaEase\n Login Page"
+        android:textSize="20sp"
+        android:textColor="#2C2727"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:background="@drawable/rounded_edittext"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edittext"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="20dp" />
+
+    <!-- Register Button (Redirect to Registration Page) -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? Register"
+        android:layout_marginTop="10dp"
+       android:background="@drawable/rounded_edittext" />
+    <Button
+        android:id="@+id/btnCheckVerification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Verification"
+        android:visibility="gone" />
+    <Button
+        android:id="@+id/btnResendVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resend Verification Email"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"/> <!-- Initially hidden -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+
+        android:text="Note: If you are the admin\n then please login with admin username and password"
+        android:textSize="20sp"
+        android:textColor="#292626"
+        android:textStyle="bold"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".HomePageActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="PharmaEase Homepage"
+        android:textSize="20sp"
+        android:textColor="#191717"
+        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/btn_log_out_homepage"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="150dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/log_out_icon"
+        android:contentDescription="Log Out" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogOut"
+        android:textColor="#252323"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="8dp"/>
+
+
+
+    <!-- ListView to display medicines -->
+
+    <ListView
+        android:id="@+id/listViewMedicines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+
+
+
+</LinearLayout>

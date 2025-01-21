@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registration"
+    android:orientation="vertical"
+    android:gravity="center"
+
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RegistrationActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="PharmaEase\n Registration Page"
+        android:textSize="20sp"
+        android:textColor="#2C2727"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:padding="5dp" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@color/black"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_height="40dp"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
+
+    <Button
+
+        android:id="@+id/btnRegister"
+        android:backgroundTint="#3F85BD"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:text="Register" />
+
+
+
+
+</LinearLayout>

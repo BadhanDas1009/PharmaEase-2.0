@@ -1,13 +1,15 @@
 package com.example.pharmaease20;
+
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter;
-import com.bumptech.glide.Glide;
 
 public class MedicineAdapter extends SimpleCursorAdapter {
 
@@ -33,10 +35,17 @@ public class MedicineAdapter extends SimpleCursorAdapter {
         TextView price = view.findViewById(R.id.medicinePrice);
         ImageView imageView = view.findViewById(R.id.medicineImage);
 
-        name.setText(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-        price.setText("Price: " + cursor.getString(cursor.getColumnIndexOrThrow("price")));
+        name.setText(cursor.getString(cursor.getColumnIndexOrThrow(MedicineDatabaseHelper.COLUMN_NAME)));
+        price.setText("Price: " + cursor.getString(cursor.getColumnIndexOrThrow(MedicineDatabaseHelper.COLUMN_PRICE)));
 
-        String imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image"));
-        Glide.with(context).load(imagePath).into(imageView);  // Load image using Glide library
+        // Retrieve BLOB image from cursor
+        byte[] imageBytes = cursor.getBlob(cursor.getColumnIndexOrThrow(MedicineDatabaseHelper.COLUMN_IMAGE));
+
+        if (imageBytes != null && imageBytes.length > 0) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            imageView.setImageBitmap(bitmap);
+        } else {
+            imageView.setImageResource(R.drawable.ic_placeholder);  // Default placeholder if no image
+        }
     }
 }

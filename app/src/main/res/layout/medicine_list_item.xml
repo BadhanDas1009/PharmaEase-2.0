@@ -30,5 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price: $0.00" />
+        <TextView
+            android:id="@+id/medicinetype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type" />
     </LinearLayout>
 </LinearLayout>

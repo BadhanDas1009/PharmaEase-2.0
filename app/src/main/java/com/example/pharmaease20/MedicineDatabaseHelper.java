@@ -10,7 +10,7 @@ import android.util.Log;
 public class MedicineDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "medicine_db";
-    private static final int DATABASE_VERSION = 3;  // Incremented version for schema changes
+    private static final int DATABASE_VERSION = 4;  // Increment version for schema changes
 
     public static final String TABLE_NAME = "medicine";
     public static final String COLUMN_ID = "id";
@@ -19,7 +19,7 @@ public class MedicineDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_QUANTITY = "quantity";
-    public static final String COLUMN_IMAGE = "image";
+    public static final String COLUMN_IMAGE = "image";  // BLOB to store image data
 
     public MedicineDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,20 +34,19 @@ public class MedicineDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DESCRIPTION + " TEXT, " +
                 COLUMN_TYPE + " TEXT, " +
                 COLUMN_QUANTITY + " INTEGER NOT NULL, " +
-                COLUMN_IMAGE + " TEXT)";
+                COLUMN_IMAGE + " BLOB)";  // BLOB for storing images
         db.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop the old table and recreate it when upgrading
         Log.d("DB_UPGRADE", "Upgrading database from version " + oldVersion + " to " + newVersion);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    // Insert medicine details safely using ContentValues
-    public long insertMedicine(String name, String price, String description, String type, int quantity, String imagePath) {
+    // Insert medicine details with byte[] image
+    public long insertMedicine(String name, String price, String description, String type, int quantity, byte[] imageBytes) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
@@ -55,17 +54,9 @@ public class MedicineDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_DESCRIPTION, description);
         values.put(COLUMN_TYPE, type);
         values.put(COLUMN_QUANTITY, quantity);
-        values.put(COLUMN_IMAGE, imagePath);
-
-        // Log database insertion values
-        Log.d("DB_INSERT", "Inserting: " + name + ", " + price + ", " + description + ", " + type + ", " + quantity + ", " + imagePath);
+        values.put(COLUMN_IMAGE, imageBytes);  // Directly storing the byte array
 
         long result = db.insert(TABLE_NAME, null, values);
-        if (result == -1) {
-            Log.e("DB_INSERT", "Insert failed");
-        } else {
-            Log.d("DB_INSERT", "Insert success, ID: " + result);
-        }
         db.close();
         return result;  // Returns row ID if successful, -1 if failed
     }
@@ -73,16 +64,22 @@ public class MedicineDatabaseHelper extends SQLiteOpenHelper {
     // Retrieve all medicines from the database
     public Cursor getAllMedicines() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery("SELECT id AS _id, name, price, description, type, quantity, image FROM " + TABLE_NAME, null);
-        } catch (Exception e) {
-            Log.e("DB_ERROR", "Error fetching medicines: " + e.getMessage());
-        }
-        return cursor;
+        return db.rawQuery("SELECT id AS _id, name, price, description, type, quantity, image FROM " + TABLE_NAME, null);
     }
 
-
+    // Get medicine image as byte[] by ID
+    public byte[] getMedicineImage(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_IMAGE + " FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)});
+        if (cursor.moveToFirst()) {
+            byte[] imageBytes = cursor.getBlob(0);
+            cursor.close();
+            return imageBytes;
+        }
+        cursor.close();
+        return null;
+    }
 
     // Check if the table exists in the database
     public boolean doesTableExist() {

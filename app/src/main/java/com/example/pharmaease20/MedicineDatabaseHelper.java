@@ -10,7 +10,7 @@ import android.util.Log;
 public class MedicineDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "medicine_db";
-    private static final int DATABASE_VERSION = 2;  // Incremented version for schema changes
+    private static final int DATABASE_VERSION = 3;  // Incremented version for schema changes
 
     public static final String TABLE_NAME = "medicine";
     public static final String COLUMN_ID = "id";
@@ -73,11 +73,16 @@ public class MedicineDatabaseHelper extends SQLiteOpenHelper {
     // Retrieve all medicines from the database
     public Cursor getAllMedicines() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT " + COLUMN_ID + " AS _id, " +
-                COLUMN_NAME + ", " +
-                COLUMN_PRICE + ", " +
-                COLUMN_TYPE + " FROM " + TABLE_NAME, null);
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT id AS _id, name, price, description, type, quantity, image FROM " + TABLE_NAME, null);
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error fetching medicines: " + e.getMessage());
+        }
+        return cursor;
     }
+
+
 
     // Check if the table exists in the database
     public boolean doesTableExist() {

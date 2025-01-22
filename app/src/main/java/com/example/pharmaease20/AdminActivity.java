@@ -19,6 +19,17 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         Button logoutButton = findViewById(R.id.btn_log_out_admin_page);
         Button InsertButton = findViewById(R.id.btn_insert);
+        Button ViewMedicineListButton = findViewById(R.id.btn_view_medicine_list);
+
+     //click listener for ViewDruglistButton
+        ViewMedicineListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(AdminActivity.this,ViewMedicineList.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         // Set Click Listener for Logout Button

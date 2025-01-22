@@ -1,7 +1,5 @@
 package com.example.pharmaease20;
 
-import android.os.Bundle;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,11 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Hide the default Action Bar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
@@ -80,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                 btnResendVerification.setVisibility(Button.VISIBLE);
                             }
                         } else {
-                            Toast.makeText(this, "Authentication failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Authentication failed! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         });
@@ -101,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(this, "Verification email resent. Please check your email.", Toast.LENGTH_SHORT).show();
                                 btnResendVerification.setVisibility(Button.GONE);
                             } else {
-                                Toast.makeText(this, "Failed to resend verification email: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Failed to resend verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             } else {
